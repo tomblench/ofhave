@@ -6,7 +6,7 @@ from errbot import BotPlugin, botcmd
 class ofhave(BotPlugin):
 
     def __init__(self):
-        self.patt = re.compile("(I|you|they|we|he|she|it)\s+(could|couldn't|should|shouldn't|would|wouldn't|won't|will not|can't|cannot|can not)(\s+have|'ve)\s+([^-.;,]*)", re.I);
+        self.patt = re.compile("(I|you|they|we|he|she|it)\s+(could|couldn't|should|shouldn't|would|wouldn't|won't|will not|can't|cannot|can not)(\s+have|'ve)\s+([^-.;,]*)", re.I)
         super().__init__()
 
     def callback_message(self, conn, mess):
