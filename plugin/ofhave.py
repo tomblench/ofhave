@@ -1,5 +1,4 @@
 import re
-import string
 
 from errbot import BotPlugin, botcmd
 
