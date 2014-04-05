@@ -4,6 +4,3 @@ Module = ofhave
 
 [Documentation]
 Description = we could of written a better bot!
-
-[Python]
-Version=3
