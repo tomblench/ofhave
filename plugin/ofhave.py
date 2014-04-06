@@ -1,5 +1,5 @@
 import re
-
+import logging
 from errbot import BotPlugin
 
 
@@ -16,6 +16,7 @@ class ofhave(BotPlugin):
             )
 
     def couldShould(self, sentence):
+        logging.info(sentence)
         pronMap = {"i": "you",
                    "you": "you",
                    "they": "they",
@@ -25,6 +26,7 @@ class ofhave(BotPlugin):
                    "it": "it"}
         # (could should would won't can't)
         m = self.patt.search(sentence)
+        logging.info(m)
         if (m):
             return ("%s %s of %s!" % (
                 pronMap[m.group(1).lower()],
