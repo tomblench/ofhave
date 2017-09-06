@@ -1,13 +1,10 @@
 import re
-import string
+import logging
+from errbot import BotPlugin
 
-from errbot import BotPlugin, botcmd
 
 class ofhave(BotPlugin):
-
-    def __init__(self):
-        self.patt = re.compile("(I|you|they|we|he|she|it)\s+(could|couldn't|should|shouldn't|would|wouldn't|won't|will not|can't|cannot|can not)(\s+have|'ve)\s+([^-.;,]*)", re.I);
-        super().__init__()
+    patt = re.compile("(I|you|they|we|he|she|it)\s+(could|couldn't|should|shouldn't|would|wouldn't|won't|will not|can't|cannot|can not)(\s+have|'ve)\s+([^-.;,]*)", re.I) # noqa
 
     def callback_message(self, conn, mess):
         reply = self.couldShould(mess.getBody())
@@ -18,18 +15,22 @@ class ofhave(BotPlugin):
                 message_type=mess.getType()
             )
 
-    def couldShould(self, sentence) :
+    def couldShould(self, sentence):
+        logging.info(sentence)
         pronMap = {"i": "you",
                    "you": "you",
                    "they": "they",
                    "we": "you",
                    "he": "he",
                    "she": "she",
-                   "it": "it"};
+                   "it": "it"}
         # (could should would won't can't)
-        m = self.patt.search(sentence);
-        if (m) :
-            return ("%s %s of %s!" % (pronMap[m.group(1).lower()], m.group(2), m.group(4)));
+        m = self.patt.search(sentence)
+        logging.info(m)
+        if (m):
+            return ("%s %s of %s!" % (
+                pronMap[m.group(1).lower()],
+                m.group(2),
+                m.group(4))
+            )
         return None
-
-
